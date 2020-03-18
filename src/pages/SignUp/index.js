@@ -1,12 +1,17 @@
 import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from '~/assets/logo.svg';
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 export default function SignIn() {
-  function handleSubmit(data) {
-    console.tron.log(data);
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
+  function handleSubmit({ name, email, password }) {
+    dispatch(signUpRequest(name, email, password));
   }
 
   const schema = Yup.object().shape({
@@ -26,7 +31,13 @@ export default function SignIn() {
         <Input name="name" type="text" placeholder="Nome Completo" />
         <Input name="email" type="email" placeholder="Seu email" />
         <Input name="password" type="password" placeholder="Sua senha" />
-        <button type="submit">Entrar</button>
+        <button type="submit">
+          {loading ? (
+            <AiOutlineLoading3Quarters className="loading-icon" />
+          ) : (
+              'Cadastrar'
+            )}
+        </button>
         <Link to="/">Já tenho login</Link>
       </Form>
     </>

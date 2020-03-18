@@ -1,6 +1,15 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { darken } from 'polished';
+import 'react-toastify/dist/ReactToastify.css';
 
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
 export const Wrapper = styled.div`
   height: 100%;
   background: linear-gradient(-90deg, #7159c1, #ab59c1);
@@ -53,6 +62,10 @@ export const Content = styled.div`
 
       &:hover {
         background: ${darken(0.03, '#3b9eff')};
+      }
+
+      .loading-icon {
+        animation: ${rotate} 2s infinite;
       }
     }
     a {
