@@ -13,7 +13,6 @@ export default function Profile() {
   function handleSubmit(data) {
     dispatch(updateProfileRequest(data));
   }
-
   function handleSignOut() {
     dispatch(signOut());
   }
